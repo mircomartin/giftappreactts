@@ -1,9 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react"
-import { CategoriesProps } from './interfaces';
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actions } from "../../redux";
 
-export const AddCategory = ({setCategories, categories}:CategoriesProps) => {
+export const AddCategory = () => {
 
     const [inputValue, setInputValue] = useState<string>('')
+
+    const dispatch = useDispatch()
+    const { addCategoryAction } = bindActionCreators(actions, dispatch)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>):void => {
 
@@ -18,7 +23,7 @@ export const AddCategory = ({setCategories, categories}:CategoriesProps) => {
 
         if ( inputValue.trim().length > 2 ) {
             
-            setCategories([inputValue,...categories ])
+            addCategoryAction(inputValue)
             setInputValue('')
 
         } else {

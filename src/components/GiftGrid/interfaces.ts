@@ -1,7 +1,3 @@
-export interface CategoryProps {
-    category: string;
-}
-
 export interface ListGifProps {
     id: string;
     title: string;
