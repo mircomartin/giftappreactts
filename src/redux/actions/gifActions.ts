@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Dispatch } from "redux"
 import { Action, ActionType } from "../types"
-import { ListGifProps } from '../../components/GiftGrid/interfaces';
+import { ListGifProps, SurferProps } from '../../components/GiftGrid/interfaces';
 
 export const getsGifsAction = ( category:string ) => {
 
@@ -22,6 +22,34 @@ export const getsGifsAction = ( category:string ) => {
 
             dispatch({
                 type: ActionType.GET_GIFS_HOME,
+                payload: gifs
+            })
+                
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const getsGifsSurferAction = ( surferId:string ) => {
+
+    return async (dispatch: Dispatch<Action>) => {
+
+        dispatch({
+            type: ActionType.LOADING_START,
+            payload: true
+        })
+
+        try {
+
+            const url= `https://api.giphy.com/v1/gifs/search?api_key=of51dI75FWxkmchK1oGr5T4YDOwLo9ib&q=${surferId}&limit=6`
+
+            const { data } = await axios.get(url)
+
+            const gifs: ListGifProps[] = data.data
+            
+            dispatch({
+                type: ActionType.GET_GIFS_SURFER,
                 payload: gifs
             })
                 

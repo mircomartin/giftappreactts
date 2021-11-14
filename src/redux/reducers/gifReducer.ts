@@ -4,6 +4,7 @@ import { ListGifProps } from '../../components/GiftGrid/interfaces';
 interface State {
     gifsHome: ListGifProps[],
     gifsSurf: ListGifProps[],
+    gifsSurfer: ListGifProps[],
     loading: boolean,
     category: string,
 }
@@ -11,6 +12,7 @@ interface State {
 const initialState = {
     gifsHome: [],
     gifsSurf: [],
+    gifsSurfer: [],
     loading: false,
     category: 'John John Florence'
 }
@@ -33,6 +35,12 @@ const gifReducer = (state: State = initialState, action: Action) => {
             return {
                 ...state,
                 gifsSurf: action.payload,
+                loading: false,
+            }
+        case ActionType.GET_GIFS_SURFER:
+            return {
+                ...state,
+                gifsSurfer: action.payload,
                 loading: false,
             }
         case ActionType.LOADING_START:

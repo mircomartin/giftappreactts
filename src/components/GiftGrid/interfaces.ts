@@ -4,4 +4,7 @@ export interface ListGifProps {
     images?: { downsized: { url: string } };
 }
 
+export interface SurferProps {
+    surferId: string;
+}
 
